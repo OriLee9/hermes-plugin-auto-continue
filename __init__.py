@@ -6,7 +6,7 @@ Solves: tool iteration limit kills the agent mid-Phase, user must type "go on".
 
 Mechanism:
 1. Agent writes .hermes/phase-plan.md when starting a planned Phase
-2. on_session_end: if interrupted + phase plan in_progress → write .hermes/auto-continue-pending
+2. on_session_end: if interrupted + phase plan in_progress → write pending marker
 3. pre_llm_call: if pending marker exists → inject "continue your unfinished task" context
 4. Agent updates phase-plan.md as steps complete; sets Status: completed when done
 
@@ -29,12 +29,12 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-# Markers
+# Paths
 HERMES_HOME = Path.home() / "AppData" / "Local" / "hermes"
 PENDING_MARKER = HERMES_HOME / "auto-continue-pending.json"
 KNOWN_WORKDIRS_FILE = HERMES_HOME / "auto-continue-workdirs.txt"
 
-# Auto-detect common workdirs
+# Default workdirs to scan for phase plans
 _DEFAULT_WORKDIRS = [
     Path("D:/agent"),
     Path("D:/agent/project_anti_zero"),

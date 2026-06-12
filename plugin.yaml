@@ -1,0 +1,3 @@
+name: auto-continue
+version: "1.0"
+description: "Auto-continue interrupted multi-step tasks via phase plan detection and context injection"
