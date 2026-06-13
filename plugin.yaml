@@ -1,3 +1,8 @@
 name: auto-continue
-version: "1.0"
-description: "Auto-continue interrupted multi-step tasks via phase plan detection and context injection"
+version: "2.0.0"
+description: "Auto-continue interrupted multi-phase tasks across sessions. Phase-plan driven, session-isolated."
+author: OriLee9
+provides_hooks:
+  - on_session_start
+  - pre_llm_call
+  - on_session_end
